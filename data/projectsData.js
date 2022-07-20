@@ -15,6 +15,24 @@ const projectsData = [
     imgSrc: '/static/images/time-machine.jpg',
     href: 'https://y.jewelry/',
   },
+  {
+    title: 'Shiftal',
+    description: `Shiftal is an online Crypto trading platform built on top of openDAX where you can trade 50+ cryptocurrencies with ease.`,
+    imgSrc: '/static/images/time-machine.jpg',
+    href: 'https://www.shiftal.com/',
+  },
+  {
+    title: 'Motorsport Multiverse',
+    description: `Simple and intuitive platform to Buy, collect, and Trade motorsport NFTs.`,
+    imgSrc: '/static/images/time-machine.jpg',
+    href: 'https://frontend-dev.motorsportmultiverse.com/',
+  },
+  {
+    title: 'Settleezee',
+    description: `Settleezee simplifies the study abroad process by connecting students and recruitment partner schools on a single platform.`,
+    imgSrc: '/static/images/time-machine.jpg',
+    href: 'https://www.settleezee.com/',
+  },
 ]
 
 export default projectsData
