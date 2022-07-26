@@ -25,7 +25,7 @@ const projectsData = [
     title: 'Motorsport Multiverse',
     description: `Simple and intuitive platform to Buy, collect, and Trade motorsport NFTs.`,
     imgSrc: '/static/images/projects/motorsport.png',
-    href: 'https://frontend-dev.motorsportmultiverse.com/',
+    href: 'https://motorsportmultiverse.com/',
   },
   {
     title: 'Settleezee',
