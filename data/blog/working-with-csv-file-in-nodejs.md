@@ -4,7 +4,7 @@ date: 2022-08-01T15:32:14Z
 lastmod: '2022-08-01'
 tags: ['nodejs', 'csv', 'csv-parser', 'csv-stringify']
 draft: false
-summary: 'An overview of how to read and write CSV files in Nodejs'
+summary: 'An overview of how to read and write CSV files in Nodejs.'
 layout: PostSimple
 canonicalUrl: https://talwinder.tech/blog/working-with-csv-file-in-nodejs
 ---
