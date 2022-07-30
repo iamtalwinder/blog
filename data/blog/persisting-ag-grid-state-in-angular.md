@@ -1,7 +1,7 @@
 ---
 title: 'Persisting AG grid state in Angular'
-date: 2022-08-04T15:32:14Z
-lastmod: '2022-08-04'
+date: 2022-08-07T15:32:14Z
+lastmod: '2022-08-07'
 tags: ['angular', 'ag-grid', 'typescript']
 draft: false
 summary: 'How to save and load ag grid filter, column and pagination state in angular using localstorage.'
@@ -9,7 +9,10 @@ layout: PostSimple
 canonicalUrl: https://talwinder.tech/blog/persisting-ag-grid-state-in-angular
 ---
 
+[See complete code on github](https://github.com/iamtalwinder/angular-ag-grid-state-persistence-blog)
+
 ## Overview
+
 
 <TOCInline toc={props.toc} exclude="Overview" toHeading={2} />
 
@@ -259,7 +262,6 @@ The below code will start listening to state change events and store all the rel
  ></ag-grid-angular>   
 ```
 
-
 ```ts:src/app/app.component.ts
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
@@ -307,6 +309,9 @@ export class AppComponent {
  public gridApi!: GridApi;
  public gridColumnApi!: ColumnApi;
 
+/**Prevent writing into state, before the localstorage state has been restored */
+ private isGridStateRestored: boolean = false;
+
  constructor(
   private http: HttpClient,
   private localStorageService: LocalStorageService,
@@ -322,12 +327,22 @@ export class AppComponent {
 
 
  onFilterChanged() {
+
+  if (!this.isGridStateRestored) {
+    return;
+  }
+
   const filterState: any = this.gridApi.getFilterModel();
 
   this.localStorageService.setItem(AG_GRID_FILTER_PERSISTENCE_KEY, filterState);
  }
 
  onSaveGridColumnState() {
+
+  if (!this.isGridStateRestored) {
+    return;
+  }
+
   const columnState: any = this.gridColumnApi.getColumnState();
   const groupState: any = this.gridColumnApi.getColumnGroupState();
 
@@ -336,17 +351,105 @@ export class AppComponent {
  }
 
  onSavePivotModeState() {
+
+  if (!this.isGridStateRestored) {
+    return;
+  }
+
   const isPivotMode: boolean = this.gridColumnApi.isPivotMode();
 
   this.localStorageService.setItem(AG_GRID_PIVOT_PERSISTENCE_KEY, isPivotMode);
  }
 
  onPaginationChanged() {
+
+  if (!this.isGridStateRestored) {
+    return;
+  }
+
   const pageNumber: Number = this.gridApi.paginationGetCurrentPage();
 
   this.localStorageService.setItem(AG_GRID_PAGINATION_PERSISTENCE_KEY, pageNumber);
  }
 }
 ```
+
+**Note**:
+
+`isGridStateRestored` check is important here. The purpose of this check is to prevent writing into state, 
+before the localstorage state has been restored.
+
+## Restoring the state
+
+```html:src/app/app.component.html
+<ag-grid-angular
+  ...
+  (firstDataRendered)="onFirstDataRendered()"
+  ...
+  
+ ></ag-grid-angular>   
+```
+
+
+```ts:src/app/app.component.ts
+...
+@Component({
+ selector: 'app-root',
+ templateUrl: './app.component.html',
+ styleUrls: ['./app.component.scss']
+})
+export class AppComponent {
+
+  ...
+
+ constructor(
+  private http: HttpClient,
+  private localStorageService: LocalStorageService,
+) {}
+
+  onFirstDataRendered() {
+    const filterState: any = this.localStorageService.getItem(AG_GRID_FILTER_PERSISTENCE_KEY);
+
+    if (filterState) {
+      this.gridApi.setFilterModel(filterState);
+    }
+
+    const columnState: any = this.localStorageService.getItem(AG_GRID_COLUMN_PERSISTENCE_KEY);
+    const groupState: any = this.localStorageService.getItem(AG_GRID_GROUP_PERSISTENCE_KEY);
+
+    if (columnState) {
+      this.gridColumnApi.applyColumnState({
+        state: columnState,
+        applyOrder: true,
+      });
+    }
+
+    if (groupState) {
+      this.gridColumnApi.setColumnGroupState(groupState);
+    }
+
+    const isPivotMode: boolean = !!this.localStorageService.getItem(AG_GRID_PIVOT_PERSISTENCE_KEY);
+
+    this.gridApi.setPivotMode(isPivotMode);
+
+    const pageNumber: number = this.localStorageService.getItem(AG_GRID_PAGINATION_PERSISTENCE_KEY);
+
+    if (pageNumber !== null || pageNumber !== undefined) {
+      this.gridApi.paginationGoToPage(pageNumber);
+    }
+
+    this.isGridStateRestored = true;
+  }
+  ...
+} 
+
+```
+
+## Conclusion
+
+Now you know how to persist and load data for a single grid. If you have multiple grids in you application 
+you can abstract this logic in dedicated component, and use that instead. And for state either you can provide 
+unique key for each grid instance(which don't change on refresh), or save state based on the route. 
+
 
 
