@@ -1,5 +1,5 @@
 const siteMetadata = {
-  title: 'Blog',
+  title: 'Talwinder Singh | Blog',
   author: 'Talwinder Singh',
   headerTitle: 'Home',
   description: 'Learn about Full Stack Development',
