@@ -73,3 +73,79 @@ Concurrent Rendering in React represents a significant shift in the way React ha
 **How to enable concurrent Rendering in react?**
 
 Using `createRoot` to initialize your application puts you in a position to use concurrent features. It's the necessary first step but not sufficient in itself to make all updates concurrent. It enables your application to utilize concurrent features like `Suspense` for data fetching, `useTransition`, and `useDeferredValue`.
+
+## Automatic Batching
+
+[Github](https://github.com/iamtalwinder/react-18-automatic-batching-demo)
+[StackBliz](https://stackblitz.com/edit/stackblitz-starters-emnd5j?file=src%2FApp.tsx)
+[Deployed Demo](https://stackblitz-starters-emnd5j.stackblitz.io/)
+
+In React 17 and earlier versions, automatic batching of state updates is limited to synchronous event handlers, like clicks or form submissions. This means multiple state updates within these events are batched into a single re-render. However, in asynchronous operations like setTimeout, Promises, and async/await, each state update triggers its own re-render, which can be less efficient.
+
+React 18 improves on this by extending automatic batching to include asynchronous operations. Now, even in contexts like setTimeout or promise resolutions, multiple state updates are batched together, leading to fewer re-renders and enhanced performance. You can opt out of this behavious using `flushSync`.
+
+
+Consider the following code, In React 18, pressing the 'Update State' button triggers only one re-render of the component, whereas in earlier versions like React 17, it would result in two re-renders.
+
+```jsx:src/components/TimeoutBatchingDemo.tsx
+import { useState, useRef, useEffect } from 'react';
+
+import '../style.css';
+
+export const TimeoutBatchingDemo = ({ title }) => {
+  const [count, setCount] = useState(0);
+  const [toggle, setToggle] = useState(false);
+  const renderCountRef = useRef(0);
+  const renderCountDisplayRef = useRef(null);
+
+  const updateRenderCountDisplay = () => {
+    if (renderCountDisplayRef.current) {
+      renderCountDisplayRef.current.textContent = renderCountRef.current;
+    }
+  };
+
+  useEffect(() => {
+    renderCountRef.current++;
+    updateRenderCountDisplay();
+  });
+
+  const handleUpdate = () => {
+    setTimeout(() => {
+      setCount((c) => c + 1); // First update
+      setToggle((t) => !t); // Second update
+    }, 100);
+  };
+
+  return (
+    <div className="demoContainer">
+      <h2>{title}</h2>
+      <div className="info">
+        <p>
+          <span className="label">Count:</span>
+          <span className="value">{count}</span>
+        </p>
+        <p>
+          <span className="label">Toggle:</span>
+          <span className="value">{toggle.toString()}</span>
+        </p>
+      </div>
+      <p className="renderCount">
+        <span className="label">Times Component Rendered:</span>
+        <span className="value" ref={renderCountDisplayRef}></span>
+      </p>
+      <button onClick={handleUpdate} className="button">
+        Update State
+      </button>
+    </div>
+  );
+};
+```
+
+**Demo**
+
+- **Automatic Batching in React 18:** Demonstrates how React 18 batches state updates in asynchronous operations.
+- **Legacy Behavior in React 17:** Showcases how React 17 handles state updates without automatic batching in certain scenarios.
+
+
+
+![Automatic Batching Demo](/static/images/blog/react-18-new-features/react-18-batching-demo.gif "Automatic Batching Demo").
