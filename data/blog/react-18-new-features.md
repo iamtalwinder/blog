@@ -87,65 +87,10 @@ React 18 improves on this by extending automatic batching to include asynchronou
 
 Consider the following code, In React 18, pressing the 'Update State' button triggers only one re-render of the component, whereas in earlier versions like React 17, it would result in two re-renders.
 
-```jsx:src/components/TimeoutBatchingDemo.tsx
-import { useState, useRef, useEffect } from 'react';
+<iframe
+  src="https://stackblitz.com/edit/stackblitz-starters-emnd5j?embed=1&file=src%2Fcomponents%2FTimeoutBatchingDemo.tsx"
+  style={{ width: '100%', height: '500px', border: 'none', borderRadius: '4px', overflow: 'hidden' }}
+  title="React Project"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; microphone; midi; payment; usb; vr; xr-spatial-tracking">
+</iframe>
 
-import '../style.css';
-
-export const TimeoutBatchingDemo = ({ title }) => {
-  const [count, setCount] = useState(0);
-  const [toggle, setToggle] = useState(false);
-  const renderCountRef = useRef(0);
-  const renderCountDisplayRef = useRef(null);
-
-  const updateRenderCountDisplay = () => {
-    if (renderCountDisplayRef.current) {
-      renderCountDisplayRef.current.textContent = renderCountRef.current;
-    }
-  };
-
-  useEffect(() => {
-    renderCountRef.current++;
-    updateRenderCountDisplay();
-  });
-
-  const handleUpdate = () => {
-    setTimeout(() => {
-      setCount((c) => c + 1); // First update
-      setToggle((t) => !t); // Second update
-    }, 100);
-  };
-
-  return (
-    <div className="demoContainer">
-      <h2>{title}</h2>
-      <div className="info">
-        <p>
-          <span className="label">Count:</span>
-          <span className="value">{count}</span>
-        </p>
-        <p>
-          <span className="label">Toggle:</span>
-          <span className="value">{toggle.toString()}</span>
-        </p>
-      </div>
-      <p className="renderCount">
-        <span className="label">Times Component Rendered:</span>
-        <span className="value" ref={renderCountDisplayRef}></span>
-      </p>
-      <button onClick={handleUpdate} className="button">
-        Update State
-      </button>
-    </div>
-  );
-};
-```
-
-**Demo**
-
-- **Automatic Batching in React 18:** Demonstrates how React 18 batches state updates in asynchronous operations.
-- **Legacy Behavior in React 17:** Showcases how React 17 handles state updates without automatic batching in certain scenarios.
-
-
-
-![Automatic Batching Demo](/static/images/blog/react-18-new-features/react-18-batching-demo.gif "Automatic Batching Demo").
