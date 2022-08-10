@@ -90,7 +90,23 @@ Consider the following code, In React 18, pressing the 'Update State' button tri
 <iframe
   src="https://stackblitz.com/edit/stackblitz-starters-emnd5j?embed=1&file=src%2Fcomponents%2FTimeoutBatchingDemo.tsx"
   style={{ width: '100%', height: '500px', border: 'none', borderRadius: '4px', overflow: 'hidden' }}
-  title="React Project"
+  title="React Automatic Batching Demo"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; microphone; midi; payment; usb; vr; xr-spatial-tracking">
+</iframe>
+
+## Transition API
+
+A "transition" in this context is an update that can be delayed without impacting the user experience negatively. The primary purpose of the Transition API is to differentiate between urgent updates, like typing in an input field, and less urgent updates, like filtering a list based on the input.
+
+**Key Benefits**
+- **Improved User Experience**: By separating urgent updates from non-urgent ones, the Transition API ensures that the interface remains responsive and smooth.
+- **Concurrent Rendering Compatibility**: It works seamlessly with concurrent rendering, allowing less urgent updates to be interrupted if more urgent updates come in.
+- **Control Over Rendering Priority**: Developers gain more control over the rendering priority, deciding what updates should be rendered immediately and which can wait.
+
+<iframe
+  src="https://stackblitz.com/edit/stackblitz-starters-gdsd1y?embed=1&file=src%2FApp.tsx&hideExplorer=1"
+  style={{ width: '100%', height: '500px', border: 'none', borderRadius: '4px', overflow: 'hidden' }}
+  title="React Transition API demo"
   allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; microphone; midi; payment; usb; vr; xr-spatial-tracking">
 </iframe>
 
