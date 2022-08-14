@@ -9,8 +9,6 @@ layout: PostSimple
 canonicalUrl: https://talwinder.tech/blog/react-18-newest-features
 ---
 
-[See complete code on github](https://github.com/iamtalwinder/angular-ag-grid-state-persistence-blog)
-
 ## Overview
 
 <TOCInline toc={props.toc} exclude="Overview" toHeading={2} />
@@ -133,3 +131,62 @@ A "transition" in this context is an update that can be delayed without impactin
   title="React Transition API demo"
   allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; microphone; midi; payment; usb; vr; xr-spatial-tracking">
 </iframe>
+
+
+## useId Hook
+
+`useId` is a new hook in React 18 designed to generate unique, stable identifiers that are consistent across both server and client renders.
+
+
+### Generating Unique IDs for Accessibility Attributes
+
+Many accessibility features in web development rely on IDs to associate labels and controls (like label for input fields) or to link descriptive elements using ARIA attributes (e.g., `aria-labelledby`, `aria-describedby`). 
+
+In dynamic applications, especially when components are generated on the fly, assigning unique and stable IDs to these elements can be challenging.
+
+The useId hook simplifies this process by generating unique and consistent IDs across renders. 
+
+<iframe
+  src="https://stackblitz.com/edit/stackblitz-starters-rcgssd?embed=1&file=src%2FAccesibleFormComponent.tsx&hideExplorer=1"
+  style={{ width: '100%', height: '500px', border: 'none', borderRadius: '4px', overflow: 'hidden' }}
+  title="React useId demo"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; microphone; midi; payment; usb; vr; xr-spatial-tracking">
+</iframe>
+
+**Explanation**
+
+- **Use of useId**: We use useId to generate two unique IDs: one for the input field (inputId) and one for the label (labelId).
+- **Linking Label and Input**: The htmlFor attribute in the `<label>` tag is set to the ID of the input field. This links the label to the input, which is important for screen readers and overall accessibility.
+- **ARIA Attribute**: Additionally, the aria-labelledby attribute in the `<input>` tag is set to the ID of the label. This provides an accessible name for the input field, further enhancing accessibility.
+
+### Generating IDs for Several Related Elements
+
+Often, elements in a UI are contextually related. For instance, a dropdown menu might have a button to open it and a list of items within it, each requiring unique but related IDs.
+
+<iframe
+  src="https://stackblitz.com/edit/stackblitz-starters-rcgssd?embed=1&file=src%2FAccordion.tsx&hideExplorer=1"
+  style={{ width: '100%', height: '500px', border: 'none', borderRadius: '4px', overflow: 'hidden' }}
+  title="React useId demo"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; microphone; midi; payment; usb; vr; xr-spatial-tracking">
+</iframe>
+
+**Explanation:**
+
+- **Accordion Component:** This component renders multiple AccordionItem components, each representing an item in the accordion.
+
+- **AccordionItem Component:** Each item uses useId to generate a unique identifier (accordionId), which is then used to create unique IDs for the button (buttonId) and content section (contentId) of each accordion item.
+
+- **Accessibility:** The `aria-expanded`, `aria-controls`, and `aria-labelledby` attributes are used to enhance the accessibility of the accordion. They provide screen readers with the necessary information about the relationship between the button and the content section.
+
+### Specifying a Shared Prefix for All Generated IDs
+
+If you render multiple independent React applications on a single page, pass `identifierPrefix` as an option to your `createRoot` or `hydrateRoot` calls.
+
+<iframe
+  src="https://stackblitz.com/edit/stackblitz-starters-rcgssd?embed=1&file=src%2Findex.tsx&hideExplorer=1"
+  style={{ width: '100%', height: '500px', border: 'none', borderRadius: '4px', overflow: 'hidden' }}
+  title="React useId demo"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; microphone; midi; payment; usb; vr; xr-spatial-tracking">
+</iframe>
+
+
