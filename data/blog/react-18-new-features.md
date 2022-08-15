@@ -189,4 +189,15 @@ If you render multiple independent React applications on a single page, pass `id
   allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; microphone; midi; payment; usb; vr; xr-spatial-tracking">
 </iframe>
 
+## useDeferredValue Hook
+
+`useDeferredValue` in React 18 allows for deferring updates to a value, helping to keep the user interface responsive by delaying the rendering of non-urgent, expensive operations. It's particularly useful for maintaining fluidity in the UI during tasks like data filtering or rendering complex components, based on rapidly changing input.
+
+<iframe
+  src="https://stackblitz.com/edit/stackblitz-starters-zded4e?embed=1&file=src%2Fcomponents%2FDeferredSearchComponent.tsx&hideExplorer=1"
+  style={{ width: '100%', height: '500px', border: 'none', borderRadius: '4px', overflow: 'hidden' }}
+  title="React useId demo"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; microphone; midi; payment; usb; vr; xr-spatial-tracking">
+</iframe>
+
 
