@@ -200,4 +200,25 @@ If you render multiple independent React applications on a single page, pass `id
   allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; microphone; midi; payment; usb; vr; xr-spatial-tracking">
 </iframe>
 
+## useInsertionEffect Hook
+`useInsertionEffect` is a new hook introduced in React 18, specifically designed for custom styling libraries that inject styles into the DOM. This hook allows for injecting styles before the browser performs layout and paint, thereby preventing visual inconsistencies or flickering effects.
+
+<iframe
+  src="https://stackblitz.com/edit/stackblitz-starters-pxkqmu?embed=1&file=src%2FDynamicStyleComponent.tsx&hideExplorer=1"
+  style={{ width: '100%', height: '500px', border: 'none', borderRadius: '4px', overflow: 'hidden' }}
+  title="React useId demo"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; microphone; midi; payment; usb; vr; xr-spatial-tracking">
+</iframe>
+
+**Explanation:**
+
+- **useStyle Custom Hook**: This custom hook demonstrates a basic idea of how useInsertionEffect might be used in a CSS-in-JS library. It creates a `<style>` tag and injects CSS into it.
+
+- **Dynamic Styling**: The example shows a simple dynamic styling scenario where the text color of a div changes based on the component's state.
+
+- **useInsertionEffect Usage**: The hook is used to insert and clean up styles. It ensures that styles are injected before the browser paints the screen, thus avoiding flickering or layout shifts when styles change.
+
+## useSyncExternalStore Hook
+
+
 
