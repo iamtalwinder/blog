@@ -220,5 +220,22 @@ If you render multiple independent React applications on a single page, pass `id
 
 ## useSyncExternalStore Hook
 
+`useSyncExternalStore` is a React Hook that lets you subscribe to an external store.
+
+<iframe
+  src="https://stackblitz.com/edit/stackblitz-starters-ayvxkt?embed=1&file=src%2FApp.tsx&hideExplorer=1"
+  style={{ width: '100%', height: '500px', border: 'none', borderRadius: '4px', overflow: 'hidden' }}
+  title="React useId demo"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; microphone; midi; payment; usb; vr; xr-spatial-tracking">
+</iframe>
+
+**Explanation:**
+
+**External Store:** The externalStore is a simplified version of a store that holds a value and allows subscription.
+
+**useSyncExternalStore Hook:** The hook is used to subscribe to the external store. The component will re-render only when the value in the external store changes.
+
+**State and Actions:** The component displays the current value from the external store and provides a button to increment this value.
+
 
 
