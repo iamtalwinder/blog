@@ -63,4 +63,45 @@ In the context of DOM event handlers, this refers to the element that received t
 </script>
 ```
 
+## Call method
+
+The `call` method in JavaScript is a predefined function method that allows you to call a function with a specific `this` value and individual arguments. This is particularly useful for method borrowing, where you can call a function that belongs to another object, and pass in your own object as the context (`this` value).
+
+**Basic Usage**
+
+```js
+function greet(greeting, punctuation) {
+  return `${greeting}, my name is ${this.name}${punctuation}`;
+}
+
+const person = {
+  name: 'Bob'
+};
+
+console.log(greet.call(person, 'Hi', '!')); // Outputs: 'Hi, my name is Bob!'
+
+```
+
+**Method Borrowing:**
+
+```js
+
+const person1 = {
+  fullName: function() {
+    return this.firstName + " " + this.lastName;
+  }
+};
+
+const person2 = {
+  firstName:"John",
+  lastName: "Doe"
+};
+
+console.log(person1.fullName.call(person2)); // Outputs: John Doe
+
+```
+
+## Apply method
+
+## Bind method
 
