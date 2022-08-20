@@ -103,5 +103,41 @@ console.log(person1.fullName.call(person2)); // Outputs: John Doe
 
 ## Apply method
 
+The `apply` method in JavaScript is similar to the `call` method, but with a key difference in how arguments are passed to the function. It allows you to call a function with a given this value and arguments provided as an array (or an array-like object). This method is particularly useful when you don't know the number of arguments that will be passed to the function.
+
+**Basic Usage**
+
+```js
+function introduce(greeting) {
+  return `${greeting}, I'm ${this.name}`;
+}
+
+const person = {
+  name: 'Eve'
+};
+
+console.log(introduce.apply(person, ['Hello'])); // Outputs: 'Hello, I'm Eve'
+```
+
+**Using an Array of Arguments**
+
+```js
+function sumNumbers() {
+  return Array.from(arguments).reduce((sum, num) => sum + num, 0);
+}
+
+const numbers = [1, 2, 3, 4, 5];
+console.log(sumNumbers.apply(null, numbers)); // Outputs: 15
+```
+
+**Arguments as an Array**
+
+Ideal for functions where you want to pass an array of arguments, like when using `Math.max` on an array.
+
+```js
+const numbers = [1, 2, 3];
+console.log(Math.max.apply(null, numbers)); // Outputs: 3
+```
+
 ## Bind method
 
