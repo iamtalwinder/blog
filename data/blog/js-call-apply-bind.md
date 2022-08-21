@@ -141,3 +141,51 @@ console.log(Math.max.apply(null, numbers)); // Outputs: 3
 
 ## Bind method
 
+The `bind` method in JavaScript creates a new function that, when called, has its `this` keyword set to a provided value, with a given sequence of arguments preceding any provided when the new function is called. Unlike `call` and `apply`, which immediately execute the function, `bind` returns a new function that can be executed later, with this value and initial arguments pre-set.
+
+**Basic Usage**
+
+```js
+function greet() {
+  return `Hello, I am ${this.name}`;
+}
+
+const person = {
+  name: 'David'
+};
+
+const boundGreet = greet.bind(person);
+console.log(boundGreet()); // Outputs: 'Hello, I am David'
+```
+
+**Pre-setting Arguments**
+
+Useful for creating functions with preset initial arguments, often known as partial application.
+
+```js
+function addNumbers(a, b) {
+  return a + b;
+}
+
+const addFive = addNumbers.bind(null, 5);
+console.log(addFive(10)); // Outputs: 15
+```
+
+**Maintaining Context in Callbacks and Event Handlers:**
+
+Ensures that `this` inside the function refers to the expected object, even when the function is used as a callback or event handler.
+
+```js
+class Button {
+  constructor(value) {
+    this.value = value;
+  }
+  click() {
+    console.log(this.value);
+  }
+}
+
+const button = new Button('hello');
+setTimeout(button.click.bind(button), 1000); // 'hello' will be logged after 1 second
+```
+
