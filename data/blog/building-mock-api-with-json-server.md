@@ -366,5 +366,38 @@ Run the script:
 npm run seed:data
 ```
 
+## Running with Docker
+
+1. Add `Dockerfile`:
+
+```Dockerfile:Dockerfile
+FROM node:18
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+RUN npm run seed:data
+
+CMD [ "npm", "start" ]
+```
+
+2. Build the image
+```bash
+docker build -t json-server-mock-api .
+```
+
+3. Run project
+```bash
+docker run -p 3000:3000 json-server-mock-api
+```
+
+
 
 
