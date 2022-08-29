@@ -14,3 +14,16 @@ canonicalUrl: https://talwinder.tech/blog/form-validation-in-react-with-use-form
 ## Overview
 
 <TOCInline toc={props.toc} exclude="Overview" toHeading={2} />
+
+## Introduction
+Dive into the intricacies of advanced form validation in React, as this blog explores the seamless integration of react-hook-form and Yup for client-side validation, coupled with MirageJS for simulating API responses, showcasing a comprehensive approach to handling form data and server interactions in modern web applications.
+
+Below is the complete example:
+
+<iframe
+  src="https://stackblitz.com/edit/stackblitz-starters-v9argg?embed=1&file=src%2FTodoForm.tsx"
+  style={{ width: '100%', height: '500px', border: 'none', borderRadius: '4px', overflow: 'hidden' }}
+  title="React Automatic Batching Demo"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; microphone; midi; payment; usb; vr; xr-spatial-tracking">
+</iframe>
+
