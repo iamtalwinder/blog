@@ -27,3 +27,26 @@ Below is the complete example:
   allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; microphone; midi; payment; usb; vr; xr-spatial-tracking">
 </iframe>
 
+## Setting up project
+
+Create new `react` project with `typescript`
+
+```bash
+npx create-react-app react-form-validation-example --template typescript
+```
+
+```bash
+cd react-form-validation-example
+```
+
+Add material UI
+```bash
+npm install @mui/material @emotion/react @emotion/styled
+```
+
+Add `yup` and `react-hook-form`, `@hookform/resolvers` is required to integrate `yup` schema with `react-hook-form`.
+```bash
+npm install react-hook-form yup @hookform/resolvers yup
+```
+
+
