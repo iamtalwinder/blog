@@ -50,3 +50,73 @@ npm install react-hook-form yup @hookform/resolvers yup
 ```
 
 
+## Adding form validation
+
+1. **Validating the Todo Form with Yup**
+
+To begin, we define a validation schema for the todo item using Yup. This schema `const schema: yup.ObjectSchema<Todo>` specifies the rules for each field in our form:
+
+```tsx
+const schema: yup.ObjectSchema<Todo> = yup
+  .object({
+    title: yup.string().min(3).max(20).required('Title is required'),
+    description: yup.string().min(3).max(50).required('Description is required'),
+    status: yup.mixed<StatusEnum>().oneOf(Object.values(StatusEnum)).required(),
+    category: yup.string().required('Category is required'),
+  })
+  .required();
+```
+
+Here, `yup.string()`, `yup.mixed()`, and methods like `min()`, `max()`, `required()`, and `oneOf()` are used to define various constraints for the title, description, status, and category fields.
+
+2. **Integrating useForm with Yup Resolver**
+
+To connect our form with Yup validation, we use `useForm` from `react-hook-form` along with `yupResolver`:
+
+```tsx
+const { control, handleSubmit, formState: { errors }, setError, reset } = useForm({
+  resolver: yupResolver(schema),
+});
+```
+
+`useForm` is initialized with `yupResolver`, which adapts the Yup validation schema to be used by `react-hook-form`.
+
+3. **Using Controller for Material UI Components**
+Material UI components are wrapped in the `Controller` component from `react-hook-form` to integrate them with the form validation logic:
+
+```tsx
+<Controller
+  name="title"
+  control={control}
+  defaultValue=""
+  render={({ field }) => (
+    <TextField
+      {...field}
+      label="Title"
+      fullWidth
+      margin="normal"
+      error={!!errors.title}
+      helperText={errors.title?.message}
+    />
+  )}
+/>
+```
+
+The `Controller` component manages the state and validation of Material UI inputs like `TextField` and `Select`.
+
+4. **Form Submission Logic**
+
+The form submission logic is handled by the `onSubmit` function, which is triggered when the form is submitted:
+
+```tsx
+const onSubmit = async (data: Todo) => {
+  console.log(data);
+  // Further submission logic can be added here
+};
+```
+
+The `handleSubmit` function from `react-hook-form`, when passed `onSubmit`, takes care of executing validation before running the submit logic.
+
+
+
+
