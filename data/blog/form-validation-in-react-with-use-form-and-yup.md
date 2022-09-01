@@ -118,5 +118,62 @@ const onSubmit = async (data: Todo) => {
 The `handleSubmit` function from `react-hook-form`, when passed `onSubmit`, takes care of executing validation before running the submit logic.
 
 
+## Mocking API with MirageJS
 
+
+```ts:src/mock-server.ts
+import { createServer, Response } from 'miragejs';
+
+function createMockServer({ environment = 'development' } = {}) {
+  let server = createServer({
+    environment,
+
+    routes() {
+      this.namespace = 'api'; // Define a namespace for all mock API routes
+
+      this.post('/todos', (schema, request) => {
+        const attrs = JSON.parse(request.requestBody);
+
+        if (attrs.title.toLowerCase() === 'Error') {
+          return new Response(
+            400,
+            {},
+            { errors: { title: 'Title cannot be "Error"' } }
+          );
+        }
+
+        return new Response(200, {}, { todo: attrs });
+      });
+    },
+  });
+
+  return server;
+}
+
+export default createMockServer;
+```
+
+**Explanation:**
+
+- A POST route to `api/todos` is defined, simulating the API endpoint for creating new todo items.
+- The server checks if the `title` field in the request body is "Error". If so, it responds with an HTTP 400 status code and a custom error message, mimicking server-side validation.
+- For titles not matching the error condition, the server responds with a 200 status code, simulating a successful todo creation.
+
+```tsx:App.tsx
+import { Box } from '@mui/material';
+import TodoForm from './TodoForm';
+import createMockServer from './mock-server';
+
+createMockServer();
+
+function App() {
+  return (
+    <Box sx={{ maxWidth: 500, margin: 'auto' }}>
+      <TodoForm />
+    </Box>
+  );
+}
+
+export default App;
+```
 
