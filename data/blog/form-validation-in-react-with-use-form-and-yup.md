@@ -177,3 +177,49 @@ function App() {
 export default App;
 ```
 
+## Integrating API response with validation
+To integrate API with the todo form change `onSubmit` in `src/TodoFrom.tsx`
+
+```tsx:src/TodoForm.tsx
+const onSubmit = async (data: Todo) => {
+    try {
+      const response = await fetch('/api/todos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        // Iterate over the errors and set them on the respective fields
+        if (responseData.errors) {
+          Object.keys(responseData.errors).forEach((key) => {
+            setError(key as keyof Todo, {
+              type: 'manual',
+              message: responseData.errors[key],
+            });
+          });
+        }
+        throw new Error('Failed to create todo');
+      }
+
+      // Handle successful todo creation here
+      alert('Todo created successfully');
+      reset();
+    } catch (error: any) {
+      // Show a general error message or handle it as needed
+      alert(error.message);
+    }
+  };
+```
+
+**Explanation**
+
+- **Form Submission (`onSubmit`)**: The `onSubmit` function is an asynchronous function that gets triggered when the form is submitted. It sends the form data (`data: Todo`) to the `/api/todos` endpoint using the `fetch` API with a POST request.
+
+- **Error Handling from API Response**: After the API call, it checks if the response was not OK (`!response.ok`). If there are errors in the response (`responseData.errors`), it iterates over these errors and uses the `setError` function from `react-hook-form` to set these errors on the respective form fields. This integrates server-side validation feedback into the form.
+
+- **Successful Submission Handling**: If the API call is successful (no errors), it shows an alert indicating successful todo creation and then resets the form to its initial state using the `reset` function from `react-hook-form`.
+
+- **Catch Block for Network Errors**: The `catch` block handles any potential errors that might occur during the fetch operation (like network issues), displaying an alert with the error message.
