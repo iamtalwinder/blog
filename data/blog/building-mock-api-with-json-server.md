@@ -1,7 +1,7 @@
 ---
 title: "Building Mock API with JSON Server: Integrating Authentication, and Dynamic Data Generation"
-date: 2022-09-05T13:00:00Z
-lastmod: '2022-09-05'
+date: 2023-12-02T13:00:00Z
+lastmod: '2023-12-02'
 tags: ['javascript', 'nodejs', 'mock-api', 'json-server']
 draft: false
 summary: "Master the art of API mocking with authentication and dynamic data generation to accelerate your development process."

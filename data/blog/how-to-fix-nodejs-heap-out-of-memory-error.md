@@ -1,7 +1,7 @@
 ---
 title: 'How to fix Nodejs heap out of memory error?'
-date: 2022-08-14T15:32:14Z
-lastmod: '2022-08-14'
+date: 2023-10-19T15:32:14Z
+lastmod: '2023-10-19'
 tags: ['nodejs']
 draft: false
 summary: 'How to fix nodejs heap out of memory error?'

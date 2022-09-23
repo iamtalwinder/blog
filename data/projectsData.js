@@ -1,10 +1,15 @@
 const projectsData = [
   {
+    title: 'Tory Burch',
+    description: `Tory Burch, founded in 2004, is a globally acclaimed luxury lifestyle brand celebrated for its distinctive designs and iconic double-T logo, offering a 
+    range of fashion and accessories across the globe.`,
+    imgSrc: '/static/images/projects/tory-burch.png',
+    href: 'https://www.toryburch.com/en-us/',
+  },
+  {
     title: 'Payever',
-    description: `Payever is a unique commerce solution that covers the whole sales cycle, from online shop and 
-    point-of-sale software to payment, customer relationship management, marketing, inventory, and shipping tools. 
-    All solutions interlock seamlessly, and when your business grows, the intuitive platform used by over 5,000 merchants 
-    just grows with you.`,
+    description: `A unified commerce solution for over 5,000 merchants, covering the entire sales cycle with seamless integration of online shops, 
+    point of sale software, payment, CRM, marketing, inventory, and shipping tools.`,
     imgSrc: '/static/images/projects/payever.jpg',
     href: 'https://getpayever.com/',
   },

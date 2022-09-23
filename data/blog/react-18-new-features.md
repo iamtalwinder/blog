@@ -1,7 +1,7 @@
 ---
 title: "The Future of UI Development: Exploring React 18's Newest Features"
-date: 2022-08-21T16:32:14Z
-lastmod: '2022-08-21'
+date: 2023-11-05T16:32:14Z
+lastmod: '2023-11-05'
 tags: ['react']
 draft: false
 summary: "Discover how Concurrent Rendering, Automatic Batching, and enhanced Suspense capabilities revolutionize UI design and performance, setting new standards in dynamic web applications."

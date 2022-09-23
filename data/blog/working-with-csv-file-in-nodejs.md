@@ -1,7 +1,7 @@
 ---
 title: 'Working with CSV files in Nodejs'
-date: 2022-08-01T15:32:14Z
-lastmod: '2022-08-01'
+date: 2023-10-07T15:32:14Z
+lastmod: '2023-10-07'
 tags: ['nodejs', 'csv', 'csv-parser', 'csv-stringify']
 draft: false
 summary: 'An overview of how to read and write CSV files in Nodejs.'

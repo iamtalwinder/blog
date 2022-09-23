@@ -1,7 +1,7 @@
 ---
 title: 'Persisting AG grid state in Angular'
-date: 2022-08-07T15:32:14Z
-lastmod: '2022-08-07'
+date: 2023-09-27T15:32:14Z
+lastmod: '2023-09-27'
 tags: ['angular', 'ag-grid', 'typescript']
 draft: false
 summary: 'How to save and load ag grid filter, column and pagination state in angular using localstorage.'

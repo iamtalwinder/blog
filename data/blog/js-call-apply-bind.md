@@ -1,7 +1,7 @@
 ---
 title: "Understanding JS call, apply and bind functions"
-date: 2022-08-28T17:32:14Z
-lastmod: '2022-08-28'
+date: 2023-11-17T17:32:14Z
+lastmod: '2023-11-17'
 tags: ['javascript']
 draft: false
 summary: "In this blog, we'll walk through JavaScript's call, bind, and apply methods, explaining their uses and differences to enhance your coding efficiency and flexibility."
